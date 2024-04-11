@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "sass": "^1.74.1"
+  },
+  "name": "smartship",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sass --watch ./assets/scss/custom.scss ./assets/css/custom.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,40 @@
+.container.cus-qldh {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.nav-dh {
+  background-color: #fff;
+  width: 240px;
+}
+.nav-dh ul {
+  list-style-type: none;
+  padding: 0;
+}
+.nav-dh ul li {
+  padding: 10px;
+}
+.nav-dh ul li a {
+  border-radius: 10px;
+  margin-right: 20px;
+  padding: 4px 0;
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+.nav-dh ul li:last-child {
+  border-bottom: none;
+}
+
+.nav-dh ul li a:hover {
+  background-color: #f0f0f0;
+}
+
+.content-dh {
+  flex: 1;
+}
+
+/*# sourceMappingURL=custom.css.map */
