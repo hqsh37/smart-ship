@@ -61,6 +61,19 @@ document.addEventListener("DOMContentLoaded", function() {
   setInterval(nextBlock, 3000);
   showBlock(currentIndex);
 });
-    
+
+// slider
+let slideIndex = 0; // Start with the first card
+showSlides();
+
+function showSlides() {
+    let slides = document.querySelectorAll('.c input[type="radio"]');
+    slideIndex++;
+    if (slideIndex >= slides.length) {
+        slideIndex = 0; // Reset index to loop back to the first card
+    }
+    slides[slideIndex].checked = true; // Check the next radio button
+    setTimeout(showSlides, 5000); // Change slide every 5 seconds
+}
 
 </script>

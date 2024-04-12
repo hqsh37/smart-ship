@@ -17,10 +17,14 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Estimated Delivery</th>
+                    <th scope="col">Mã ĐH</th>
+                    <th scope="col">Tên đơn hàng</th>
+                    <th scope="col">Tên người nhận</th>
+                    <th scope="col">số điện thoại</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">ship</th>
+                    <th scope="col">COD</th>
+                    <th scope="col">Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
