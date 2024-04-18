@@ -14,15 +14,25 @@
     <div>
         <?php
         include 'header.php';
-        echo '<div class="body">';
-        if (isset($_GET['page'])) {
-            $page = $_GET['page'];
-        } else {
-            $page = 'home';
+        $url = isset($_GET['page']) ? $_GET['page'] : '/';
+        if (strpos($url, 'smartShip/') === 0) {
+            $url = substr($url, strlen('smartShip/'));
         }
-        switch($page) {
+        
+        echo '<div class="body">';
+
+        switch($url) {
+            case 'home':
+                include 'View/main.php';
+                break;
             case 'qlDH':
                 include 'View/qlDH.php';
+                break;
+            case 'tien-trinh':
+                include 'View/tientrinh.php';
+                break;
+            case 'qlDT':
+                include 'View/qlDoanhThu.php';
                 break;
             case 'home':
                 include 'View/main.php';

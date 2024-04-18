@@ -18,10 +18,10 @@
                 <img src="./assets/img/logo.png" alt="logo">
             </div>
             <ul id="nav">
-                <li><a href="?page=home">Trang chủ</a></li>
-                <li><a href="?page=qlDH">Quản lý đơn hàng</a></li>
-                <li><a href="#">Quản lý doanh thu</a></li>
-                <li><a href="#">Tiến trình ĐH</a></li>
+                <li><a href="home">Trang chủ</a></li>
+                <li><a href="qlDH">Quản lý đơn hàng</a></li>
+                <li><a href="qlDT">Quản lý doanh thu</a></li>
+                <li><a href="tien-trinh">Tiến trình ĐH</a></li>
                 <li>
                     <a href="#">
                         Khác
@@ -36,7 +36,7 @@
             </ul>
             <div class="header-right">
                 <div class="create-product">
-                    <a class="btn-create-product" href="?page=createDH"><span class="ti-plus"></span> Tạo đơn hàng</a>
+                    <a class="btn-create-product" href="createDH"><span class="ti-plus"></span> Tạo đơn hàng</a>
                 </div>
                 <div class="noti cus-tippy" id="noti-tippy-hov">
                     <span id="noti-tippy" class="ti-bell"></span>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="login cus-tippy">
                     <!-- <a class="btn-login" href="#">LOGIN</a> -->
-                    <div id="avt-tippy" class="img-avt">
+                    <div id="avt-tippy" class="img-avt d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Tài Khoản">
                         <img src="./assets/img/avt.png" alt="avt">
                     </div>
                     <div id="usr-body">
@@ -70,11 +70,11 @@
                         </div>
                         <div class="sub-usr">
                             <span class="ti-map-alt"></span>
-                            <a href="?page=address" class="reset-a"><p>Quản lý địa chỉ</p></a>
+                            <a href="address" class="reset-a"><p>Quản lý địa chỉ</p></a>
                         </div>
                         <div class="sub-usr">
                             <span class="ti-settings"></span>
-                            <a href="?page=userInfo" class="reset-a"><p>Cài đặt và hồ sơ cá nhân</p></a>
+                            <a href="userInfo" class="reset-a"><p>Cài đặt và hồ sơ cá nhân</p></a>
                         </div>
                         <div class="sub-usr">
                             <span class="ti-help"></span>

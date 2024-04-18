@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /
+
+# Bỏ qua các tệp và thư mục thực
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Chuyển hướng các yêu cầu không phải là tệp hoặc thư mục tồn tại đến index.php
+RewriteRule ^(.*)$ smartShip/index.php?page=$1 [L,QSA]

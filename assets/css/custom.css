@@ -127,11 +127,21 @@
 }
 .card-info .card {
   margin: 16px 8px;
+  min-height: 530px;
 }
 
 .map.container {
   display: flex;
   justify-content: center;
+}
+
+.cus-tientrinh .search-dh {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
+.cus-tientrinh .search-dh form.d-flex {
+  width: 30%;
 }
 
 /*# sourceMappingURL=custom.css.map */

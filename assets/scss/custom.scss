@@ -154,6 +154,7 @@
 
     .card {
         margin: 16px 8px;
+        min-height: 530px;
     }
 }
 
@@ -163,3 +164,15 @@
 }
 
 // qlDH.php
+
+.cus-tientrinh {
+  .search-dh {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+
+    form.d-flex {
+      width: 30%;
+    }
+  }
+}
