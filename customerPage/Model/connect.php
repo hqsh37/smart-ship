@@ -1,17 +1,21 @@
 <?php
 class Ketnoidb {
     function connect(& $conn){
-        $conn = mysqli_connect('localhost', 'root', '', 'db_smartship');
-        if ($conn->connect_error) {
-            die("connect db error!");
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "db_smartship";
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        
+        if ($conn) {
+            $conn -> set_charset("utf8");
+            return $conn;
+        }else {
+            return false;
         }
-
-        return $conn;
-
     }
-
     function disconnect($conn){
-        $conn->close();
+        mysqli_close($conn);
     }
 }
 
