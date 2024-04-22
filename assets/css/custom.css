@@ -1,3 +1,24 @@
+.main-header .cus-noti {
+  position: relative;
+}
+.main-header .number-noti {
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  left: 25px;
+  background: rgb(254, 44, 85);
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border-radius: 10px;
+  position: absolute;
+  top: -25%;
+  padding: 0px 6px;
+}
+
 .container.cus-qldh {
   display: flex;
   align-items: flex-start;
@@ -122,7 +143,7 @@
 
 .card-info {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
 }
 .card-info .card {

@@ -6,7 +6,7 @@ class ModelDonhang {
         $p = new Ketnoidb();
         $conn;
         $p->connect($conn);
-        $sql = "SELECT * FROM `donhang` WHERE `idKH` = '".$maKH."'";
+        $sql = "SELECT * FROM `donhang` WHERE `idKH` = '{$maKH}'";
         $result = mysqli_query($conn, $sql);
         $p->disconnect($conn);
 

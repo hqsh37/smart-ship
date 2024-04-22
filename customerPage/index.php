@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart ship</title>
     <?php
+    // import css
     include './assets/css/style.css.php';
     ?>
 </head>
@@ -13,12 +14,14 @@
 <body>
     <div>
         <?php
+        $page1 = isset($_GET['page1']) ? $_GET['page1'] : '0';
         include 'header.php';
         $url = isset($_GET['page']) ? $_GET['page'] : '/';
         if (strpos($url, 'smartShip/') === 0) {
             $url = substr($url, strlen('smartShip/'));
         }
         
+        // echo $url."\t".$page1;
         echo '<div class="body">';
 
         switch($url) {
@@ -26,6 +29,10 @@
                 include 'View/main.php';
                 break;
             case 'qlDH':
+                if(!!$page1 && $page1 === "detail-product") {
+                    include 'View/qlDH/chitietDH.php';
+                    break;
+                }
                 include 'View/qlDH.php';
                 break;
             case 'tien-trinh':

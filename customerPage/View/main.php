@@ -71,7 +71,7 @@
     <div class="map container">
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.375468702126!2d106.6923911!3d10.859020400000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752839152bcdf1%3A0xf600077c23b5d684!2zMjcgVsaw4budbiBMw6BpLCBBbiBQaMO6IMSQw7RuZywgUXXhuq1uIDEyLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e0!3m2!1sen!2s!4v1710739870194!5m2!1sen!2s"
-            width="1000px" height="550" style="border: 0px; visibility: visible; animation-name: fadeIn;width: 90%;"
+            height="550" style="border: 0px; visibility: visible; animation-name: fadeIn;width: 90%;"
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 

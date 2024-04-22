@@ -180,11 +180,11 @@
         responseType: "application/json",
     };
     var promise = axios(Parameter);
-    promise.then(function(result) {
+    promise.then((result) => {
         renderCity(result.data);
     });
 
-    function renderCity(data) {
+    const renderCity = (data) => {
         for (const x of data) {
             var opt = document.createElement('option');
             opt.value = x.Name;
