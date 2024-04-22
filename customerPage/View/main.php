@@ -4,28 +4,28 @@
 
     <div class="slider-main">
         <div class="c">
-    
+
             <input type="radio" name="a" id="cr-1" checked>
             <label for="cr-1" style="--hue: 32"></label>
             <div class="ci" style="--z: 4">
                 <h2 class="ch" style="--h: 32; --s: 80%; --l: 90%">Giao hàng đa phương tiện!</h2>
                 <img src="./assets/img/home1.jpg" alt="Snow on leafs">
             </div>
-    
+
             <input type="radio" name="a" id="cr-2">
             <label for="cr-2" style="--hue: 82"></label>
             <div class="ci" style="--z: 3">
                 <h2 class="ch" style="--h: 82; --s: 80%; --l: 90%">An toàn!</h2>
                 <img src="./assets/img/home2.jpg" alt="Trees">
             </div>
-    
+
             <input type="radio" name="a" id="cr-3">
             <label for="cr-3" style="--hue: 40"></label>
             <div class="ci" style="--z: 2">
                 <h2 class="ch" style="--h: 40; --s: 100%; --l: 89%">Nhanh chóng!</h2>
                 <img src="./assets/img/home3.jpg" alt="Mountains and houses">
             </div>
-    
+
             <input type="radio" name="a" id="cr-4">
             <label for="cr-4" style="--hue: 210"></label>
             <div class="ci" style="--z: 1">
@@ -71,8 +71,24 @@
     <div class="map container">
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.375468702126!2d106.6923911!3d10.859020400000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752839152bcdf1%3A0xf600077c23b5d684!2zMjcgVsaw4budbiBMw6BpLCBBbiBQaMO6IMSQw7RuZywgUXXhuq1uIDEyLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e0!3m2!1sen!2s!4v1710739870194!5m2!1sen!2s"
-            height="550" style="border: 0px; visibility: visible; animation-name: fadeIn;width: 90%;"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            height="550" style="border: 0px; visibility: visible; animation-name: fadeIn;width: 90%;" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
 </div>
+
+<script>
+// slider
+let slideIndex = 0; // Start with the first card
+showSlides();
+
+function showSlides() {
+    let slides = document.querySelectorAll('.c input[type="radio"][name="a"]');
+    slideIndex++;
+    if (slideIndex >= slides.length) {
+        slideIndex = 0; // Reset index to loop back to the first card
+    }
+    slides[slideIndex].checked = true; // Check the next radio button
+    setTimeout(showSlides, 5000); // Change slide every 5 seconds
+}
+</script>

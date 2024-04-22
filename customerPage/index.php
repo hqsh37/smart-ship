@@ -28,6 +28,16 @@
             case 'home':
                 include 'View/main.php';
                 break;
+            case 'api':
+                if(!!$page1 && $page1 === "district") {
+                    include 'Api/district.php';
+                    break;
+                }
+                if(!!$page1 && $page1 === "ward") {
+                    include 'Api/ward.php';
+                    break;
+                }
+                break;
             case 'qlDH':
                 if(!!$page1 && $page1 === "detail-product") {
                     include 'View/qlDH/chitietDH.php';

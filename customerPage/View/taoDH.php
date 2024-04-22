@@ -15,13 +15,22 @@
             <div class="form-group">
                 <label for="txt-address">Địa chỉ chi tiết</label>
                 <input type="text" class="form-control" id="txt-address" placeholder="Nhập địa chỉ tiết">
-            </div>
+            </div>  
             <div class="form-group">
                 <div class="row">
-                    <label for="city">Địa chỉ</label>
+                    <label for="province">Tỉnh/Thành phố</label>
                     <div class="col">
-                        <select class="form-control" id="city">
-                            <option value="" selected>Chọn tỉnh thành</option>
+                        <select id="province" name="province" class="form-control">
+                            <option value="">Chọn một tỉnh</option>
+                            <!-- populate options with data from your database or API -->
+                            <?php
+                                include "./customerPage/Controller/cPlace.php";
+                                $p = new CtrlPlace();
+                                $arr = $p->getProvinces();
+                                foreach ($arr as $item) {
+                                    echo '<option value="'.$item['provinceId'].'">'.$item['name'].'</option>';
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="col">
@@ -30,7 +39,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-control" id="ward">
+                        <select class="form-control" id="wards">
                             <option value="" selected>Chọn phường xã</option>
                         </select>
                     </div>
@@ -70,16 +79,16 @@
             <h4 class="text-center">Thông tin đơn hàng</h4>
             <div class="form-group">
                 <label for="txt-name">Tên sản phẩm</label>
-                <input type="text" class="form-control" id="txt-name" placeholder="Nhập tên người nhận">
+                <input type="text" class="form-control" id="txt-name" placeholder="Nhập tên sản phẩm">
             </div>
             <div class="row">
                 <div class="col">
                     <label for="txt-sdt">Khối lượng</label>
-                    <input type="text" class="form-control" id="txt-sdt" placeholder="Nhập số điện thoại">
+                    <input type="text" class="form-control" id="txt-sdt" placeholder="Nhập khối lượng">
                 </div>
                 <div class="col">
                     <label for="txt-address">Số lượng</label>
-                    <input type="text" class="form-control" id="txt-address" placeholder="Nhập địa chỉ tiết">
+                    <input type="number" class="form-control" id="txt-address" placeholder="Nhập số lượng">
                 </div>
             </div>
             <div class="form-group">
@@ -114,50 +123,50 @@
             <div class="form-group">
                 <label for="opt-loaihang">Dịch vụ gia tăng</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="de-vo" id="de-vo">
+                    <label class="form-check-label" for="de-vo">
                         Hàng dễ vỡ
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="gia-tri-cao" id="gia-tri-cao">
+                    <label class="form-check-label" for="gia-tri-cao">
                         Hàng giá trị cao
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="tai-lieu" id="tai-lieu">
+                    <label class="form-check-label" for="tai-lieu">
                         Thư tín tài liệu
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="chat-long" id="chat-long">
+                    <label class="form-check-label" for="chat-long">
                         Hàng chất lỏng
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="hsd-ngan" id="hsd-ngan">
+                    <label class="form-check-label" for="hsd-ngan">
                         Hàng có HSD ngắn
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="sac-nhon" id="sac-nhon">
+                    <label class="form-check-label" for="sac-nhon">
                         Hàng có cạnh sắc nhọn
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="nong-san" id="nong-san">
+                    <label class="form-check-label" for="nong-san">
                         Nông sản, thực phẩm khô
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="nguyen-hop" id="nguyen-hop">
+                    <label class="form-check-label" for="nguyen-hop">
                         Hàng nguyên hộp
                     </label>
                 </div>
@@ -169,60 +178,45 @@
             </div>
         </div>
     </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
-    var citis = document.getElementById("city");
-    var districts = document.getElementById("district");
-    var wards = document.getElementById("ward");
-    var Parameter = {
-        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-        method: "GET",
-        responseType: "application/json",
-    };
-    var promise = axios(Parameter);
-    promise.then((result) => {
-        renderCity(result.data);
-    });
-
-    const renderCity = (data) => {
-        for (const x of data) {
-            var opt = document.createElement('option');
-            opt.value = x.Name;
-            opt.text = x.Name;
-            opt.setAttribute('data-id', x.Id);
-            citis.options.add(opt);
-        }
-        citis.onchange = function() {
-            district.length = 1;
-            ward.length = 1;
-            if (this.options[this.selectedIndex].dataset.id != "") {
-                const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
-
-                for (const k of result[0].Districts) {
-                    var opt = document.createElement('option');
-                    opt.value = k.Name;
-                    opt.text = k.Name;
-                    opt.setAttribute('data-id', k.Id);
-                    district.options.add(opt);
-                }
+    function UpdateSelect(elementId, url, targetId) {
+        var selectElement = document.getElementById(elementId);
+        selectElement.addEventListener("change", function() {
+            var id = this.value;
+            if (id) {
+                fetch(url + id)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        var targetElement = document.getElementById(targetId);
+                        targetElement.innerHTML = ""; // Xóa tất cả các option hiện tại trong hộp chọn
+                        data.forEach(function(item) {
+                            var option = document.createElement("option");
+                            option.value = item.id;
+                            option.text = item.name;
+                            targetElement.appendChild(option); // Thêm option mới vào hộp chọn
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Fetch error:", error);
+                    });
+            } else {
+                var targetElement = document.getElementById(targetId);
+                targetElement.innerHTML = ""; // Xóa tất cả các option hiện tại trong hộp chọn
+                var option = document.createElement("option");
+                option.value = "";
+                option.text = "Chọn quận huyện";
+                targetElement.append(option);
             }
-        };
-        district.onchange = function() {
-            ward.length = 1;
-            const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
-            if (this.options[this.selectedIndex].dataset.id != "") {
-                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex]
-                    .dataset.id)[0].Wards;
-
-                for (const w of dataWards) {
-                    var opt = document.createElement('option');
-                    opt.value = w.Name;
-                    opt.text = w.Name;
-                    opt.setAttribute('data-id', w.Id);
-                    wards.options.add(opt);
-                }
-            }
-        };
+        });
     }
+
+    // Sử dụng hàm UpdateSelect
+    UpdateSelect("province", "http://127.0.0.1/smartShip/api/district?provinceId=", "district");
+    UpdateSelect("district", "http://127.0.0.1/smartShip/api/ward?districtId=", "wards");
     </script>
 </div>

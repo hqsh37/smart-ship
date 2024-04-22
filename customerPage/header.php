@@ -92,7 +92,7 @@ $path = isset($_GET['page1']) ? '.' : '';
                             <p>Đóng góp ý kiến</p>
                         </div>
                         <div class="sub-usr">
-                            <span class="ti-arrowh-circle-right"></span>
+                            <span class="ti-shift-left"></span>
                             <p>Đăng xuất</p>
                         </div>
                     </div>

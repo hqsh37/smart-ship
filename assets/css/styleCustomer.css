@@ -236,6 +236,7 @@ button.btn-lg:hover {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .noti span {   
@@ -264,7 +265,7 @@ button.btn-lg:hover {
 
 /* body tippy usr */
 .body {
-    min-height: 650px   ;
+    min-height: 650px;
 }
 
 .head-usr {

@@ -28,27 +28,7 @@
             </div>
 
             <div class="field-btn">
-                <button>Cập nhật</button>
-            </div>
-        </div>
-            
-        <div class="content cus-vien">
-            <div class="add-content">
-                <div class="usr-info">
-                    <span class="usr-fullname">
-                        Hoàng Quahg Sang
-                    </span>
-                    <div class="space-usr">|</div>
-                    <div class="usr-phone">(+84) 907322495</div>
-                </div>
-                <div class="usr-addr">
-                    <div class="add-more">27 Vườn Lài</div>
-                    <div class="add-main">Phường An Phú Đông, Quận 12, TP. Hồ Chí Minh</div>
-                </div>
-            </div>
-            
-            <div class="field-btn">
-                <button>Cập nhật</button>
+                <button class="updateButton">Cập nhật</button>
             </div>
         </div>
 
@@ -66,9 +46,29 @@
                     <div class="add-main">Phường An Phú Đông, Quận 12, TP. Hồ Chí Minh</div>
                 </div>
             </div>
-            
+
             <div class="field-btn">
-                <button>Cập nhật</button>
+                <button class="updateButton">Cập nhật</button>
+            </div>
+        </div>
+
+        <div class="content cus-vien">
+            <div class="add-content">
+                <div class="usr-info">
+                    <span class="usr-fullname">
+                        Hoàng Quahg Sang
+                    </span>
+                    <div class="space-usr">|</div>
+                    <div class="usr-phone">(+84) 907322495</div>
+                </div>
+                <div class="usr-addr">
+                    <div class="add-more">27 Vườn Lài</div>
+                    <div class="add-main">Phường An Phú Đông, Quận 12, TP. Hồ Chí Minh</div>
+                </div>
+            </div>
+
+            <div class="field-btn">
+                <button class="updateButton">Cập nhật</button>
             </div>
         </div>
     </div>
@@ -127,6 +127,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+
     var citis = document.getElementById("city");
     var districts = document.getElementById("district");
     var wards = document.getElementById("ward");
