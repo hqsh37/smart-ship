@@ -1,0 +1,49 @@
+body {
+    background-image: url('../img/background.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+.container.cus-login {
+    display: flex;
+    justify-content: center;
+    min-height: 480px;
+    width: 100%;
+    padding-top: 90px;
+}
+
+.row.cus-login {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border-radius: 15px;
+}   
+
+
+.text-center.cus-login {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .03);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.container.cus-signup {
+    padding-top: 70px;
+} 
+
+.btn.btn-cus {
+    padding: 8px;
+    width: 180px;
+}
+
+.form-group.cus-form {
+    display: flex;
+    justify-content: center;
+}

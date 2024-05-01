@@ -1,25 +1,22 @@
 <?php
-$page1 = isset($_GET['page1']) ? $_GET['page1'] : '0';
-$url = isset($_GET['page']) ? $_GET['page'] : '/';
-
-if (strpos($url, 'smartShip/') === 0) {
-    $url = substr($url, strlen('smartShip/'));
-}
-
-switch($url) {
-    case 'api':
-        if(!!$page1 && $page1 === "district") {
-            include './customerPage/Api/district.php';
-            break;
-        }
-        if(!!$page1 && $page1 === "ward") {
-            include './customerPage/Api/ward.php';
-            break;
-        }
-        break;
-    default:
-        include "./customerPage/index.php";
-        break;
-
-}
+include 'config.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Ship</title>
+    <?php include "./assets/css/style.css.php" ?>
+</head>
+<body>
+    <?php
+        include './views/header.php';
+        echo "<div class=\"body\">";
+        $app->run();
+        echo "</div>";
+        include './views/footer.php'; 
+        include "./assets/js/main.js.php";
+    ?>
+</body>
+</html>

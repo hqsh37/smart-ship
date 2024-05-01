@@ -1,0 +1,1 @@
+<h1>Revenue page</h1>

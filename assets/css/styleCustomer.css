@@ -218,6 +218,7 @@ button.btn-lg:hover {
 }
 
 .btn-login {
+    margin-left: 16px;
     padding: 8px 17px;
     background-color: #E8E9ED;
     color: #034460;
@@ -229,7 +230,7 @@ button.btn-lg:hover {
 
 .btn-login:hover {
     color: #041C2F;
-    background-color: #FEC201;
+    background-color: #ddd;
 }
 
 .img-avt img {
@@ -242,6 +243,14 @@ button.btn-lg:hover {
 .noti span {   
     font-size: 1.6rem;
     margin: 0 12px;
+}
+/* tippy ẩn khi chưa có js */
+#noti-body {
+    display: none;
+}
+
+#usr-body {
+    display: none;
 }
 
 /* custom tippy usr */
@@ -391,6 +400,10 @@ button.btn-lg:hover {
 h3.content-label {
     font-size: 1.6rem;
     margin: 0;
+}
+
+.content-input input:focus {
+    box-shadow: none;
 }
 
 .content-input input {
