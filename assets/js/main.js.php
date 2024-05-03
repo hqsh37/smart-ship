@@ -1,3 +1,5 @@
+<script src="<?php echo $app->geturl("assets/bootstrap-5.0.2-dist/js/bootstrap.min.js"); ?>"></script>
+
 <script>
 
 // show tippy khi đã tải xong trang

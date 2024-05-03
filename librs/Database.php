@@ -18,15 +18,26 @@ class Database {
         return $result;
     }
 
+    // public static function find($data) {
+    //     $_this = new static();
+    //     $keys = array_keys($data);
+    //     $values = array_values($data);
+    //     $sql = "SELECT * FROM `{$_this->table}` WHERE `$keys[0]` = '$values[0]' LIMIT 1";
+    //     $query = $_this->conn->query($sql);
+    //     return $query->fetch_object();
+    // }
+
     public static function find($data) {
         $_this = new static();
-        $keys = array_keys($data);
-        $values = array_values($data);
-        $sql = "SELECT * FROM `{$_this->table}` WHERE `$keys[0]` = '$values[0]' LIMIT 1";
+        $rule = "";
+        foreach ($data as $key => $value) {
+            $rule.= "`$key` = '$value' AND ";
+        }
+        $rule = rtrim($rule, "AND ");
+        $sql = "SELECT * FROM `{$_this->table}` WHERE {$rule} LIMIT 1";
         $query = $_this->conn->query($sql);
         return $query->fetch_object();
     }
-
     
     public static function finds($data) {
         $_this = new static();
@@ -63,7 +74,6 @@ class Database {
         }
         $sql = rtrim($sql, ", ");
         $sql.= " WHERE `$keyID[0]` = '$valueID[0]'";
-        echo $sql;
         $query = $_this->conn->query($sql);
         return $query;
     }

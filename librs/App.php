@@ -27,6 +27,11 @@ class App {
         return $this->http_host.'/'.$path;
     }
 
+    public function convertDate($date) {
+        $date = explode('-', $date);
+        return $date[2].'/'.$date[1].'/'.$date[0];
+    }
+
     public function setsession($typeUser, $name, $id, $chuVu) {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

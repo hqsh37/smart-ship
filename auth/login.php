@@ -1,3 +1,49 @@
+<?php
+include "../config.php"; 
+if (isset($_SESSION['user'])) {
+    echo '<script>
+    alert("Bạn đã đăng nhập rồi!");
+    window.location.href = "'.PROJECT_NAME.'/home";
+    </script>';
+    exit();
+}
+
+if (isset($_POST['btnLogin'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $error = "";
+
+    $checkEmail = User::find([
+        "email" => $email,
+    ]);
+
+    if(!$checkEmail) {
+        $error = "Email chưa được dăng ký!";
+    } else {
+        $pass_hash = $checkEmail->matKhau;
+        if(!!!password_verify($password, $pass_hash)) {
+            $error = "Mật khẩu không chính xác";
+        } else {
+            $_SESSION['user'] = $checkEmail;
+        }
+    }
+
+    if($error === "") {
+        echo '<script>
+        alert("Đăng nhập thành công!");
+        window.location.href = "'.PROJECT_NAME.'/home";
+        </script>';
+    } else {
+        echo '<script>
+        alert("'.$error.'");
+        window.location.href = "login.php";
+        </script>';
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,22 +58,22 @@
 
 <body>
     <div class="container cus-login">
-        <div class="row cus-login bg-info">
+        <div class="row cus-login">
             <div class=" text-center cus-login">
                 <h5>LOGIN</h5>
             </div>
             <div class="card-body">
-                <form role="form" action="login_script.php" method="POST">
+                <form role="form" action="login.php" method="POST">
                     <div class="form-group">
-                        <label for="manv">Employee ID:</label>
-                        <input type="manv" class="form-control" placeholder="Nhập mã nhân viên" name="manv" required>
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
                         <input type="password" class="form-control" placeholder="Password" name="password" required>
                     </div>
                     <div class="form-group cus-form">
-                        <button type="submit" name="submit" class="btn btn-outline-light btn-cus">Login</button>
+                        <button type="submit" name="btnLogin" class="btn btn-outline-dark btn-cus">Login</button>
                     </div>
                     <br />
                     <div class="">

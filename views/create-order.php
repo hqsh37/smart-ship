@@ -1,42 +1,52 @@
 <?php
-$address = AddressUser::finds([
-    "idKH" => "1",
-]);
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+    $auth = true;
+    
+    $idKH = $user->idKH;
+    $address =  AddressUser::finds([
+        "idKH" => $idKH,
+    ]);
+
+} else {
+    $auth = false;
+}
 ?>
 
 <div class="container">
+    <?php if ($auth) : ?>
     <h3>Tạo đơn hàng</h3>
-    <form action="#" method="post">
+    <form action="<?php echo $this->geturl("pay-order") ?>" method="POST">
 
         <div>
             <h4 class="text-center">Thông tin người nhận</h4>
             <div class="form-group">
                 <label for="txt-name">Tên người nhận</label>
-                <input type="text" class="form-control" id="txt-name" placeholder="Nhập tên người nhận">
+                <input type="text" class="form-control" id="txt-name" name="receiverName" placeholder="Nhập tên người nhận" required>
             </div>
             <div class="form-group">
                 <label for="txt-sdt">Số điện thoại</label>
-                <input type="text" class="form-control" id="txt-sdt" placeholder="Nhập số điện thoại">
+                <input type="text" class="form-control" id="txt-sdt" name="receiverPhone" placeholder="Nhập số điện thoại" required>
             </div>
             <div class="form-group">
                 <label for="txt-address">Địa chỉ chi tiết</label>
-                <input type="text" class="form-control" id="txt-address" placeholder="Nhập địa chỉ tiết">
+                <input type="text" class="form-control" id="txt-address" name="receiverPlace" placeholder="Nhập địa chỉ tiết" required>
             </div>
             <div class="form-group">
                 <div class="row">
                     <label for="province">Tỉnh/Thành phố</label>
                     <div class="col">
-                        <select id="province" name="province" class="form-control">
+                        <select id="province" name="province" class="form-control" required>
                             <option value="">Chọn một tỉnh</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-control" id="district">
+                        <select class="form-control" id="district" name="district" required>
                             <option value="" selected>Chọn quận huyện</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-control" id="wards">
+                        <select class="form-control" id="wards" name="wards" required>
                             <option value="" selected>Chọn phường xã</option>
                         </select>
                     </div>
@@ -55,9 +65,11 @@ $address = AddressUser::finds([
                     Lấy hàng tận nơi
                 </label>
                 <select class="form-control" id="diachi-ng" name="diachiTannoi">
-            <?php foreach ($address as $item) : ?>
-                <option value="<?php echo $item->idDiaChiKH ?>"><?php echo $item->address ?>, <?php echo $item->wardName ?>, <?php echo $item->districtName ?>, <?php echo $item->provinceName ?> - (<?php echo $item->phone ?>)</option>
-            <?php endforeach; ?>
+                    <?php foreach ($address as $item) : ?>
+                    <option value="<?php echo $item->idDiaChiKH ?>"><?php echo $item->address ?>,
+                        <?php echo $item->wardName ?>, <?php echo $item->districtName ?>,
+                        <?php echo $item->provinceName ?> - (<?php echo $item->phone ?>)</option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <br />
@@ -75,16 +87,17 @@ $address = AddressUser::finds([
             <h4 class="text-center">Thông tin đơn hàng</h4>
             <div class="form-group">
                 <label for="txt-name-product">Tên sản phẩm</label>
-                <input type="text" class="form-control" id="txt-name-product" name="productName" placeholder="Nhập tên sản phẩm" require>
+                <input type="text" class="form-control" id="txt-name-product" name="productName"
+                    placeholder="Nhập tên sản phẩm" required>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="txt-kl">Khối lượng(g)</label>
-                    <input type="number" class="form-control" id="txt-kl" placeholder="Nhập khối lượng" require>
+                    <input type="number" class="form-control" id="txt-kl" placeholder="Nhập khối lượng" required>
                 </div>
                 <div class="col">
                     <label for="txt-sl">Số lượng</label>
-                    <input type="number" class="form-control" id="txt-sl" placeholder="Nhập số lượng" value="1" require>
+                    <input type="number" class="form-control" id="txt-sl" placeholder="Nhập số lượng" value="1" required>
                 </div>
             </div>
             <div class="form-group">
@@ -97,7 +110,8 @@ $address = AddressUser::finds([
                     <input type="number" class="form-control" id="txt-dai" name="chieuDai" placeholder="Nhập chiều dài">
                 </div>
                 <div class="col">
-                    <input type="number" class="form-control" id="txt-rong" name="chieuRong" placeholder="Nhập chiều rộng">
+                    <input type="number" class="form-control" id="txt-rong" name="chieuRong"
+                        placeholder="Nhập chiều rộng">
                 </div>
                 <div class="col">
                     <input type="number" class="form-control" id="txt-cao" name="chieuCao" placeholder="Nhập chiều cao">
@@ -170,7 +184,7 @@ $address = AddressUser::finds([
             <br />
             <br />
             <div class="d-flex justify-content-center align-items-center">
-                <button class="btn-lg">Tạo đơn hàng</button>
+                <button class="btn-lg" name="btnCreateOrder">Tạo đơn hàng</button>
             </div>
         </div>
     </form>
@@ -205,10 +219,10 @@ $address = AddressUser::finds([
     });
 
     const convertKhoiluong = (khoiluong) => {
-        if(khoiluong <= 0) {
+        if (khoiluong <= 0) {
             khoiluong = "thông tin nhập không hợp lệ!";
-        } else if(khoiluong > 1000) {
-            khoiluong = khoiluong/1000 + "(kg)";
+        } else if (khoiluong > 1000) {
+            khoiluong = khoiluong / 1000 + "(kg)";
         } else {
             khoiluong += "(g)";
         }
@@ -229,12 +243,12 @@ $address = AddressUser::finds([
                     })
                     .then(data => {
                         var targetElement = document.getElementById(targetId);
-                        targetElement.innerHTML = ""; 
+                        targetElement.innerHTML = "";
                         data.forEach(function(item) {
                             var option = document.createElement("option");
                             option.value = item.id;
                             option.text = item.name;
-                            targetElement.appendChild(option); 
+                            targetElement.appendChild(option);
                         });
                     })
                     .catch(error => {
@@ -242,7 +256,7 @@ $address = AddressUser::finds([
                     });
             } else {
                 var targetElement = document.getElementById(targetId);
-                targetElement.innerHTML = ""; 
+                targetElement.innerHTML = "";
                 var option = document.createElement("option");
                 option.value = "";
                 option.text = "Chọn quận huyện";
@@ -262,12 +276,12 @@ $address = AddressUser::finds([
                     return response.json();
                 })
                 .then(data => {
-                    targetElement.innerHTML = ""; 
+                    targetElement.innerHTML = "";
                     data.forEach(function(item) {
                         var option = document.createElement("option");
                         option.value = item.id;
                         option.text = item.name;
-                        targetElement.appendChild(option); 
+                        targetElement.appendChild(option);
                     });
                 })
                 .catch(error => {
@@ -286,7 +300,7 @@ $address = AddressUser::finds([
                             return response.json();
                         })
                         .then(data => {
-                            targetElement.innerHTML = ""; 
+                            targetElement.innerHTML = "";
                             data.forEach(function(item) {
                                 var option = document.createElement("option");
                                 option.value = item.id;
@@ -308,4 +322,11 @@ $address = AddressUser::finds([
     UpdateSelect("district", "<?php echo  API_URL ?>/ward.php?districtId=", "wards");
     UpdateSelectProvice("<?php echo  API_URL ?>/province.php", "province", 1);
     </script>
+
+    <?php else : ?>
+    <div class="no-user">
+        <h3>Vui lòng đăng nhập để sử dụng tính năng này!</h3>
+    </div>
+
+    <?php endif; ?>
 </div>

@@ -1,5 +1,18 @@
 <?php
-$auth = false;
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+    $auth = true;
+    
+    $idkh = $user->idKH;
+    $name = $user->hoTen;
+    $birth = $user->sinhNhat;
+    $gender = $user->gioiTinh;
+    $phone = $user->soDienThoai;
+    $email = $user->email;
+
+} else {
+    $auth = false;
+}
 ?>
 
 <header>
@@ -75,7 +88,7 @@ $auth = false;
                             <div class="avt-more">
                                 <img src="<?php echo $app->geturl("assets/img/avt.png"); ?>" alt="avatar">
                             </div>
-                            <p>Hoàng Quang Sang</p>
+                            <p><?php echo $name; ?></p>
                         </div>
                         <div class="sub-usr">
                             <span class="ti-map-alt"></span>
@@ -95,7 +108,7 @@ $auth = false;
                         </div>
                         <div class="sub-usr">
                             <span class="ti-shift-left"></span>
-                            <p>Đăng xuất</p>
+                            <a href="<?php echo $app->geturl("auth/logout.php") ?>" class="reset-a"><p>Đăng xuất</p></a>
                         </div>
                     </div>
                     <?php else : ?>

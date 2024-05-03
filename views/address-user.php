@@ -1,8 +1,16 @@
 <?php
-$idKH = 1;
-$address =  AddressUser::finds([
-    "idKH" => $idKH,
-]);
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+    $auth = true;
+    
+    $idKH = $user->idKH;
+    $address =  AddressUser::finds([
+        "idKH" => $idKH,
+    ]);
+
+} else {
+    $auth = false;
+}
 
 $urlpath = $this->geturl("address-user");
 $disDel = "style=\"display: none\"";
@@ -96,6 +104,7 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
 ?>
 
 <div class="container">
+    <?php if($auth) : ?>
     <div class="head-address">
         <h2 class="add-title">Địa chỉ của tôi</h2>
 
@@ -109,7 +118,7 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
     </div>
 
     <div class="wrap-add">
-    <?php if (isset($address) && is_array($address)) : ?>
+        <?php if (isset($address) && is_array($address) && count($address) > 0) : ?>
         <?php foreach ($address as $addr) : ?>
         <div class="content cus-vien">
             <div class="add-content">
@@ -135,6 +144,10 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
             </div>
         </div>
         <?php endforeach; ?>
+        <?php else : ?>
+            <div class="no-user">
+                <h3>Vui lòng thêm 1 địa chỉ để sử dụng!</h3>
+            </div>
         <?php endif; ?>
 
     </div>
@@ -202,13 +215,6 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
             </form>
         </div>
     </div>
-    <?php
-    if(isset($address) && is_array($address)) {
-        foreach ($address as $item) {
-            handleModalUpdate($urlpath, $item->tenKH, $item->phone, $item->address, $item->wardName, $item->districtName, $item->provinceName, $item->wards, $item->district, $item->province, $item->idDiaChiKH);
-        }
-    }
-    ?>
 
     <?php
     // handle view update function
@@ -299,7 +305,13 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
         
     }
     
+    if(isset($address) && is_array($address)) {
+        foreach ($address as $item) {
+            handleModalUpdate($urlpath, $item->tenKH, $item->phone, $item->address, $item->wardName, $item->districtName, $item->provinceName, $item->wards, $item->district, $item->province, $item->idDiaChiKH);
+        }
+    }
     ?>
+    
     <script>
     function UpdateSelect(elementId, url, targetId) {
         var selectElement = document.getElementById(elementId);
@@ -394,10 +406,19 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
     UpdateSelect("district", "<?php echo API_URL ?>/ward.php?districtId=", "wards");
     UpdateSelectProvice("<?php echo API_URL ?>/province.php", "province", 1);
     <?php foreach($address as $item) : ?>
-    UpdateSelect("province-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>/district.php?provinceId=", "district-<?php echo $item->idDiaChiKH; ?>");
-    UpdateSelect("district-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>/ward.php?districtId=", "wards-<?php echo $item->idDiaChiKH; ?>");
+    UpdateSelect("province-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>/district.php?provinceId=",
+        "district-<?php echo $item->idDiaChiKH; ?>");
+    UpdateSelect("district-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>/ward.php?districtId=",
+        "wards-<?php echo $item->idDiaChiKH; ?>");
     UpdateSelectProvice("<?php echo API_URL ?>/province.php", "province-<?php echo $item->idDiaChiKH; ?>", 0);
     <?php endforeach; ?>
-
     </script>
+
+    <?php else : ?>
+    <div class="no-user">
+        <h3>Vui lòng đăng nhập để sử dụng tính năng này!</h3>
+    </div>
+
+    <?php endif; ?>
+
 </div>

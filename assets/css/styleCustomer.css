@@ -544,3 +544,9 @@ a.link-footer:hover {
         padding: 0 10px;
     }
 }   
+
+/* Pages no user */
+.no-user {
+    margin-top: 16px;
+    text-align: center;
+}

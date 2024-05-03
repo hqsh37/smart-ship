@@ -1,9 +1,6 @@
 <?php
-// Checking session
-// session_start();
-// if(isset($_SESSION['auth'])) {
-//     auth()
-// }
+// Session start
+session_start();
 
 // Config const and import librs automation
 define('HOST', '127.0.0.1');
@@ -11,6 +8,13 @@ define('USER', 'root');
 define('PASSWORD', '');
 define('DB', 'db_smartShip');
 define('PROJECT_NAME', '/smart-ship');
+
+// checking session
+// if(isset($_SESSION['auth'])) {
+//     echo '<script>
+//     window.location.href = "'.PROJECT_NAME.'/auth/login.php";
+//     </script>';
+// } 
 
 $root = $_SERVER['DOCUMENT_ROOT'];
 $app_folder = $root.PROJECT_NAME;
