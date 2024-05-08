@@ -6,7 +6,7 @@ class AddressUser extends Database {
         parent::__construct();
     }
 
-    public static function find($data) {
+    public static function find($data, $select = null) {
         $_this = new static();
         $keys = array_keys($data);
         $values = array_values($data);

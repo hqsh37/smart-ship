@@ -1,5 +1,12 @@
 <?php
 include "../config.php";
+
+if (!isset($_SESSION['employee'])) {
+    echo '<script>
+    window.location.href = "'.PROJECT_NAME.'/employee/login.php";
+    </script>';
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
