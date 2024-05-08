@@ -7,10 +7,10 @@ class Database {
         $this->conn = mysqli_connect(HOST, USER, PASSWORD, DB);
     }
 
-    public static function select() {
+    public static function select($select = "*") {
         $_this = new static();
         $result = [];
-        $sql = "SELECT * FROM `{$_this->table}` WHERE 1";
+        $sql = "SELECT {$select} FROM `{$_this->table}` WHERE 1";
         $query = $_this->conn->query($sql);
         while ($row = $query->fetch_object()) {
             $result[] = $row;
@@ -18,34 +18,30 @@ class Database {
         return $result;
     }
 
-    // public static function find($data) {
-    //     $_this = new static();
-    //     $keys = array_keys($data);
-    //     $values = array_values($data);
-    //     $sql = "SELECT * FROM `{$_this->table}` WHERE `$keys[0]` = '$values[0]' LIMIT 1";
-    //     $query = $_this->conn->query($sql);
-    //     return $query->fetch_object();
-    // }
-
-    public static function find($data) {
+    public static function find($data, $select="*") {
         $_this = new static();
         $rule = "";
         foreach ($data as $key => $value) {
             $rule.= "`$key` = '$value' AND ";
         }
         $rule = rtrim($rule, "AND ");
-        $sql = "SELECT * FROM `{$_this->table}` WHERE {$rule} LIMIT 1";
+        $sql = "SELECT {$select} FROM `{$_this->table}` WHERE {$rule} LIMIT 1";
         $query = $_this->conn->query($sql);
+        $_this->conn->close();
         return $query->fetch_object();
     }
     
     public static function finds($data) {
         $_this = new static();
-        $keys = array_keys($data);
-        $values = array_values($data);
         $result = [];
-        $sql = "SELECT * FROM `{$_this->table}` WHERE `$keys[0]` = '$values[0]'";
+        $rule = "";
+        foreach ($data as $key => $value) {
+            $rule.= "`$key` = '$value' AND ";
+        }
+        $rule = rtrim($rule, "AND ");
+        $sql = "SELECT * FROM `{$_this->table}` WHERE {$rule}";
         $query = $_this->conn->query($sql);
+        $_this->conn->close();
         while ($row = $query->fetch_object()) {
             $result[] = $row;
         }
@@ -60,6 +56,7 @@ class Database {
         $values = implode("', '", $values);
         $sql = "INSERT INTO `{$_this->table}` (`$keys`) VALUES ('$values')";
         $query = $_this->conn->query($sql);
+        $_this->conn->close();
         return $query;
     }
 
@@ -75,6 +72,7 @@ class Database {
         $sql = rtrim($sql, ", ");
         $sql.= " WHERE `$keyID[0]` = '$valueID[0]'";
         $query = $_this->conn->query($sql);
+        $_this->conn->close();
         return $query;
     }
 
@@ -84,6 +82,7 @@ class Database {
         $valueID = array_values($id)[0];
         $sql = "DELETE FROM `{$_this->table}` WHERE `$keyID` = '$valueID'";
         $query = $_this->conn->query($sql);
+        $_this->conn->close();
         return $query;
     }
 
@@ -93,6 +92,7 @@ class Database {
         $values = array_values($data);
         $sql = "SELECT * FROM `{$table}` WHERE `$keys[0]` = '$values[0]' LIMIT 1";
         $query = $_this->conn->query($sql);
+        $_this->conn->close();
         return $query->fetch_object();
     }
 
@@ -105,7 +105,6 @@ class Database {
         $params = implode(", ", array_fill(0, count($data), "?"));
     
         $sql = "INSERT INTO `$table` (`$keys`) VALUES ($params)";
-    
         $stmt = $_this->conn->prepare($sql);
     
         if (!$stmt) {

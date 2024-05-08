@@ -16,6 +16,9 @@ define('PROJECT_NAME', '/smart-ship');
 //     </script>';
 // } 
 
+// Lấy thời gian Việt Nam
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 $root = $_SERVER['DOCUMENT_ROOT'];
 $app_folder = $root.PROJECT_NAME;
 $http_host = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'];

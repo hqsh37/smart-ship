@@ -14,7 +14,7 @@ if (isset($_SESSION['user'])) {
 ?>
 
 <div class="container">
-    <?php if ($auth) : ?>
+    <?php if ($auth && count($address) > 0) : ?>
     <h3>Tạo đơn hàng</h3>
     <form action="<?php echo $this->geturl("pay-order") ?>" method="POST">
 
@@ -51,7 +51,6 @@ if (isset($_SESSION['user'])) {
                         </select>
                     </div>
                 </div>
-                </select>
             </div>
         </div>
         <br />
@@ -74,7 +73,7 @@ if (isset($_SESSION['user'])) {
             </div>
             <br />
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="layhang" id="lh-buucuc" value="buucuc">
+                <input class="form-check-input" type="radio" name="layhang" id="lh-buucuc" value="buucuc" disabled >
                 <label class="form-check-label" for="lh-buucuc">
                     Gửi hàng bưu cục
                 </label>
@@ -93,16 +92,16 @@ if (isset($_SESSION['user'])) {
             <div class="row">
                 <div class="col">
                     <label for="txt-kl">Khối lượng(g)</label>
-                    <input type="number" class="form-control" id="txt-kl" placeholder="Nhập khối lượng" required>
+                    <input type="number" class="form-control" id="txt-kl" name="khoiluong" placeholder="Nhập khối lượng" required>
                 </div>
                 <div class="col">
                     <label for="txt-sl">Số lượng</label>
-                    <input type="number" class="form-control" id="txt-sl" placeholder="Nhập số lượng" value="1" required>
+                    <input type="number" class="form-control" id="txt-sl" name="soluong" placeholder="Nhập số lượng" value="1" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="txt-address">Tổng khối lượng</label>
-                <input type="text" class="form-control" id="txt-tongkl" value="Vui lòng khối lượng!" readonly>
+                <input type="text" class="form-control" id="txt-tongkl" name="tongKl" value="Vui lòng khối lượng!" readonly>
             </div>
             <div class="row">
                 <label for="city">Kích thước(mm)</label>
@@ -119,7 +118,7 @@ if (isset($_SESSION['user'])) {
             </div>
             <div class="form-group">
                 <label for="opt-loaihang">Loại đơn hàng</label>
-                <select class="form-control" id="opt-loaihang">
+                <select class="form-control" name="loaiDH" id="opt-loaihang">
                     <option value="" selected>Chọn loại đơn hàng</option>
                     <option value="mypham">Hóa mỹ phẩm</option>
                     <option value="gomsu">Đồ thủy tinh, gốm sứ, hàng dễ vỡ</option>
@@ -133,49 +132,49 @@ if (isset($_SESSION['user'])) {
             <div class="form-group">
                 <label for="opt-loaihang">Dịch vụ gia tăng</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="de-vo" id="de-vo">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="de-vo" id="de-vo">
                     <label class="form-check-label" for="de-vo">
                         Hàng dễ vỡ
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="gia-tri-cao" id="gia-tri-cao">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="gia-tri-cao" id="gia-tri-cao">
                     <label class="form-check-label" for="gia-tri-cao">
                         Hàng giá trị cao
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="tai-lieu" id="tai-lieu">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="tai-lieu" id="tai-lieu">
                     <label class="form-check-label" for="tai-lieu">
                         Thư tín tài liệu
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="chat-long" id="chat-long">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="chat-long" id="chat-long">
                     <label class="form-check-label" for="chat-long">
                         Hàng chất lỏng
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="hsd-ngan" id="hsd-ngan">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="hsd-ngan" id="hsd-ngan">
                     <label class="form-check-label" for="hsd-ngan">
                         Hàng có HSD ngắn
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="sac-nhon" id="sac-nhon">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="sac-nhon" id="sac-nhon">
                     <label class="form-check-label" for="sac-nhon">
                         Hàng có cạnh sắc nhọn
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="nong-san" id="nong-san">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="nong-san" id="nong-san">
                     <label class="form-check-label" for="nong-san">
                         Nông sản, thực phẩm khô
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="nguyen-hop" id="nguyen-hop">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="nguyen-hop" id="nguyen-hop">
                     <label class="form-check-label" for="nguyen-hop">
                         Hàng nguyên hộp
                     </label>
@@ -322,7 +321,10 @@ if (isset($_SESSION['user'])) {
     UpdateSelect("district", "<?php echo  API_URL ?>/ward.php?districtId=", "wards");
     UpdateSelectProvice("<?php echo  API_URL ?>/province.php", "province", 1);
     </script>
-
+    <?php elseif ($auth &&  count($address) === 0) : ?>
+    <div class="no-user">
+        <h3>Vui lòng thêm một địa chỉ để sử dụng!</h3>
+    </div>
     <?php else : ?>
     <div class="no-user">
         <h3>Vui lòng đăng nhập để sử dụng tính năng này!</h3>

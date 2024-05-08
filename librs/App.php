@@ -32,6 +32,24 @@ class App {
         return $date[2].'/'.$date[1].'/'.$date[0];
     }
 
+    function convertToVND($number) {
+        $vndString = number_format($number, 0, ',', '.') . '₫';
+        
+        return $vndString;
+    }
+
+    function generateId($length = 10) {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+    
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+    
+        return $randomString;
+    }
+
     public function setsession($typeUser, $name, $id, $chuVu) {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

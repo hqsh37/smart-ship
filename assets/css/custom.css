@@ -169,4 +169,10 @@
   display: none;
 }
 
+.img-qr {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
 /*# sourceMappingURL=custom.css.map */
