@@ -48,6 +48,23 @@ class Database {
         return $result;
     }
 
+    public static function findsWithOr($data) {
+        $_this = new static();
+        $result = [];
+        $rule = "";
+        foreach ($data as $key => $value) {
+            $rule.= "`$key` = '$value' OR ";
+        }
+        $rule = rtrim($rule, "OR ");
+        $sql = "SELECT * FROM `{$_this->table}` WHERE {$rule}";
+        $query = $_this->conn->query($sql);
+        $_this->conn->close();
+        while ($row = $query->fetch_object()) {
+            $result[] = $row;
+        }
+        return $result;
+    }
+
     public static function create($data) {
         $_this = new static();
         $keys = array_keys($data);

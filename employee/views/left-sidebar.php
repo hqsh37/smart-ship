@@ -28,6 +28,11 @@ $position = $_SESSION['employee']->chucVu;
                 <i class="fa fa-pencil"></i> <span>Tạo đơn</span>
             </a>
         </li>
+        <li>
+            <a href="<?php echo $app->geturl("approve-order"); ?>">
+                <i class="fa fa-pencil"></i> <span>Duyệt đơn</span>
+            </a>
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-pie-chart"></i>
@@ -39,6 +44,9 @@ $position = $_SESSION['employee']->chucVu;
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Thống kê tiền hàng</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Thống kê doanh thu</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Đơn hàng cần xử lý</a></li>
+                <?php if ($position === "owner") : ?>
+                <li><a href="<?php echo $app->geturl("employee"); ?>"><i class="fa fa-circle-o"></i>Quản lý nhân viên</a></li>
+                <?php endif;?>
             </ul>
         </li>
         <li class="treeview">
@@ -50,8 +58,6 @@ $position = $_SESSION['employee']->chucVu;
             <ul class="treeview-menu">
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Tra cứu bưu cục</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Ước tính cước phí</a></li>
-                <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Thống kê doanh thu</a></li>
-                <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Đơn hàng cần xử lý</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -63,6 +69,10 @@ $position = $_SESSION['employee']->chucVu;
             <ul class="treeview-menu">
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Tài khoản</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Đổi mật khẩu</a></li>
+                <?php if ($position === "owner") : ?>
+                <li><a href="<?php echo $app->geturl("management-area"); ?>"><i class="fa fa-circle-o"></i>Quản lý khu vực</a></li>
+                <li><a href="<?php echo $app->geturl("create-user"); ?>"><i class="fa fa-circle-o"></i>Cấp tài khoản</a></li>
+                <?php endif;?>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Quản lý khuyến mãi</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Danh sách hàng hoá</a></li>
             </ul>

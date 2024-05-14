@@ -53,7 +53,6 @@ if (!isset($_SESSION['admin'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="dist/js/app.min.js"></script>
-    <script src="dist/js/pages/dashboard.js"></script>
     <script src="dist/js/demo.js"></script>
 </body>
 

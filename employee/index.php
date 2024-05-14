@@ -3,7 +3,7 @@ include "../config.php";
 
 if (!isset($_SESSION['employee'])) {
     echo '<script>
-    window.location.href = "'.PROJECT_NAME.'/employee/login.php";
+    window.location.href = "'.PROJECT_NAME.'/auth/employee-login.php";
     </script>';
     exit();
 }
@@ -21,6 +21,7 @@ if (!isset($_SESSION['employee'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/style.css">
 
 </head>
 
@@ -52,8 +53,7 @@ if (!isset($_SESSION['employee'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="dist/js/app.min.js"></script>
-    <script src="dist/js/pages/dashboard.js"></script>
-    <script src="dist/js/demo.js"></script>
+    <!-- <script src="dist/js/demo.js"></script> -->
 </body>
 
 </html>

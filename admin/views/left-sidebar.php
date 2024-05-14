@@ -28,11 +28,6 @@ $position = $_SESSION['admin']->position;
                 <i class="fa fa-home"></i> <span>Xử lý thanh toán</span>
             </a>
         </li>
-        <li>
-            <a href="<?php echo $app->geturl("transport-fee"); ?>">
-                <i class="fa fa-home"></i> <span>Xét phí vận chuyển</span>
-            </a>
-        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-pie-chart"></i>
@@ -41,9 +36,22 @@ $position = $_SESSION['admin']->position;
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $app->geturl("postoffice"); ?>"><i class="fa fa-circle-o"></i> Quản lý bưu cục</a></li>
-                <li><a href="<?php echo $app->geturl("postoffice-user"); ?>"><i class="fa fa-circle-o"></i> Quản lý user bưu cục</a></li>
-                <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Quản lý user</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Quản lý mã khuyến mãi</a></li>
+                <li><a href="<?php echo $app->geturl("transport-fee"); ?>"><i class="fa fa-home"></i> <span>Quản lý phí vận chuyển</span></a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-pie-chart"></i>
+                <span>Quản lý user</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $app->geturl("postoffice-user"); ?>"><i class="fa fa-circle-o"></i> Quản lý user bưu cục</a></li>
+                <?php if ($position === "owner") : ?>
+                <li><a href="<?php echo $app->geturl("admin-user"); ?>"><i class="fa fa-circle-o"></i> Quản lý user Admin</a></li>
+                <?php endif;?>
+                <li><a href="<?php echo $app->geturl("user"); ?>"><i class="fa fa-circle-o"></i> Quản lý user</a></li>
             </ul>
         </li>
         <li class="treeview">

@@ -144,7 +144,7 @@ if(isset($_POST['btnCreateOrder'])) {
                 "ngayGui" => $currentDate,
                 "trangThai" => "cho-duyet",
                 "hinhThucGiao" => "kh-bc",
-                "khoiluong" => $kichThuoc,
+                "khoiluong" => $tongKl,
                 "kichThuoc" => $kichThuoc,
                 "loaiDonHang" => $loaiDH,
                 "dichvuGiaTang" => $dichvuString,
