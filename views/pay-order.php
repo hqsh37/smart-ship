@@ -1,27 +1,15 @@
 <?php
-// receiverName: Hoàng Quang Sang
-// receiverPhone: 0328435442
-// receiverPlace: 27 Vườn Lài
-// province: 50
-// district: 551
-// wards: 8685
-// layhang: tannoi
-// diachiTannoi: 2
-// productName: Chuột gaming
-// khoiluong: 300
-// soluong: 2
-// tongKl: 600(g)
-// chieuDai: 30
-// chieuRong: 60
-// chieuCao: 120
-// loaiDH: dientu
-// dichvuGT[]: gia-tri-cao
-// dichvuGT[]: nguyen-hop
-// btnCreateOrder:
+if (!isset($_SESSION['product']) && !isset($_POST['createOrder'])) {
+    echo '<script>
+    window.location.href = "'.$this->geturl("create-order").'";
+    </script>';
+    die();
+}
 
 $alert = "";
-// SELECT `idDiaChiDonHang`, `tinh`, `huyen`, `xa`, `chiTiet` FROM `diachidonhang` WHERE 1
-if(isset($_POST['btnCreateOrder'])) {
+$promotion = "";
+
+if (isset($_POST['createOrder'])) {
     $user = $_SESSION['user'];
     $idKH = $user->idKH;
 
@@ -37,7 +25,17 @@ if(isset($_POST['btnCreateOrder'])) {
     $khoiluong = $_POST['khoiluong'];
     $soluong = $_POST['soluong'];
     $tongKl = $_POST['tongKl'];
-       
+
+    if ($tongKl === "Vui lòng nhập khối lượng!") {
+        $tongKl = $khoiluong*$soluong."g";
+    }
+
+    
+    $_SESSION['product']['tongKl'] = $tongKl;
+    $_SESSION['product']['productName'] = $productName;
+
+
+        
     // lấy thông tin địa chỉ người nhận
     $resultAddressUsr = AddressUser::find([
         "idDiaChiKH" => $diachiTannoi,
@@ -59,8 +57,42 @@ if(isset($_POST['btnCreateOrder'])) {
             }
         }
     }
-     
+    $_SESSION['product']['tongTien'] = $tongTien;
+} else {
+    if (isset($_SESSION['product'])) {
+        $tongTien = $_SESSION['product']['tongTien'];    
+        $resultOrder = $_SESSION['product']['resultOrder'];
+        $productName = $_SESSION['product']['productName'];
+        $tongKl = $_SESSION['product']['tongKl'];
 
+        if(isset($_POST['promotion'])) {
+            $promotion = $_POST['promotion'];
+
+            $checkPromotion = Promotion::find([
+                "maKhuyenMai" => $promotion,
+            ]);
+
+            if ($checkPromotion) {
+                $discount = $checkPromotion->phanTramGiam;
+                $tongTien = $tongTien - ($tongTien*$discount/100);
+                echo '<script>
+                alert("Bạn được giảm '.$discount.'% phí vận chuyển cho đơn hàng trên");
+                </script>';
+            } else {
+                echo '<script>
+                alert("Mã khuyến mãi không tồn tại!");
+                </script>';
+            }
+
+            
+        }
+    }
+
+}
+
+// SELECT `idDiaChiDonHang`, `tinh`, `huyen`, `xa`, `chiTiet` FROM `diachidonhang` WHERE 1
+if(isset($_POST['createOrder']) && $_SESSION['func']['order'] === 'createOrder') {
+    $_SESSION['func']['order'] = 'payOrder';
 
     $currentDate = date('Y-m-d');
     $dichvuString = "";
@@ -150,6 +182,7 @@ if(isset($_POST['btnCreateOrder'])) {
                 "dichvuGiaTang" => $dichvuString,
                 "ghiChu" => "",
             ], "donhang");
+            $_SESSION['product']['resultOrder'] = $resultOrder;
         }
     } else {
         $alert = "Vui lòng gửi trực tiếp với bưu cục để có thể tạo đơn này!";
@@ -198,6 +231,15 @@ if(isset($_POST['btnCreateOrder'])) {
         </div>
     </div>
     <div class="main-pay">
+        <h4 class="text-center">Mã khuyến mãi</h4>
+        <form action="<?php echo $this->geturl("pay-order")?>" method="POST">
+            <div class="cus-subpay">
+                <input class="form-control mr-sm-2" type="text" name="promotion" placeholder="Nhập mã khuyễn mãi" value="<?php echo $promotion?>">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Áp dụng</button>
+            </div>
+        </form>
+    </div>
+    <div class="main-pay">
         <form method="POST" action="<?php echo $this->geturl("complete-pay") ?>">
             <h4 class="text-center">Hình thức thanh toán</h4>
             <div class="form-check">
@@ -234,7 +276,7 @@ if(isset($_POST['btnCreateOrder'])) {
                         placeholder="Vui lòng số tiền thu hộ!" readonly required>
                 </div>
                 <br />
-                <br /> 
+                <br />
                 <div style="display: none;">
                     <input name="idDH" value="<?php echo $resultOrder?>">
                     <input name="tongTien" value="<?php echo $tongTien?>">
@@ -283,3 +325,7 @@ if(isset($_POST['btnCreateOrder'])) {
     });
     </script>
 </div>
+
+<?php
+
+?>

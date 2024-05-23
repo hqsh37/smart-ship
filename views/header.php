@@ -1,4 +1,5 @@
 <?php
+$auth = false;
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $auth = true;
@@ -10,9 +11,8 @@ if (isset($_SESSION['user'])) {
     $phone = $user->soDienThoai;
     $email = $user->email;
 
-} else {
-    $auth = false;
 }
+
 ?>
 
 <header>
@@ -53,34 +53,52 @@ if (isset($_SESSION['user'])) {
             </ul>
             <div class="header-right">
                 <div class="create-product">
-                    <a class="btn-create-product" href="<?php echo $app->geturl("create-order") ?>"><span class="ti-plus"></span> Tạo đơn hàng</a>
+                    <a class="btn-create-product" href="<?php echo $app->geturl("create-order") ?>"><span
+                            class="ti-plus"></span> Tạo đơn hàng</a>
                 </div>
                 <?php if ($auth) : ?>
+                <?php
+                $notis = Notification::finds([
+                    "idKH" => $idkh,
+                ]);
+                $countSeen = 0;
+                if($notis) {
+                    $countSeen = Notification::finds([
+                        "idKH" => $idkh,
+                        "trangThai" => "not-seen",
+                    ], "COUNT(`thongbao`.`idKH`) as sumSeen", 0)[0]->sumSeen;
+                }
+                ?>
                 <div class="noti cus-tippy" id="noti-tippy-hov">
                     <div class="cus-noti">
                         <span id="noti-tippy" class="ti-bell"></span>
-                        <div class="number-noti">8</div>
+                        <?php if ($countSeen > 0) : ?>
+                        <div class="number-noti"><?php echo $countSeen; ?></div>
+                        <?php endif; ?>
                     </div>
                     <div id="noti-body">
                         <div class="head-noti-tp">
                             <p>Thông báo</p>
                             <span class="ti-more"></span>
                         </div>
+                        <?php if ($notis) : ?>
+                        <?php foreach ($notis as $noti) : ?>
                         <div class="main-noti-tp">
-                            <strong>Đào Như Thuần</strong> đã đăng một video trong <strong>Bộ tộc MixiGaming</strong>: Giọng hát truyền cảm cúm và cái kết :)).
+                            <?php echo $noti->noiDung; ?>
                         </div>
+                        <?php endforeach; ?>
+                        <?php else :?>
                         <div class="main-noti-tp">
-                            <strong>Đào Như Thuần</strong> đã đăng một video trong <strong>Bộ tộc MixiGaming</strong>: Giọng hát truyền cảm cúm và cái kết :)).
+                            <strong>Bạn không có thông báo nào!</strong>
                         </div>
-                        <div class="main-noti-tp">
-                            <strong>Đào Như Thuần</strong> đã đăng một video trong <strong>Bộ tộc MixiGaming</strong>: Giọng hát truyền cảm cúm và cái kết :)).
-                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <?php endif; ?> 
+                <?php endif; ?>
                 <div class="login cus-tippy">
                     <?php if ($auth) : ?>
-                    <div id="avt-tippy" class="img-avt d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Tài Khoản">
+                    <div id="avt-tippy" class="img-avt d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Tài Khoản">
                         <img src="<?php echo $app->geturl("assets/img/avt.png"); ?>" alt="avt">
                     </div>
                     <div id="usr-body">
@@ -92,11 +110,15 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <div class="sub-usr">
                             <span class="ti-map-alt"></span>
-                            <a href="<?php echo $app->geturl("address-user") ?>" class="reset-a"><p>Quản lý địa chỉ</p></a>
+                            <a href="<?php echo $app->geturl("address-user") ?>" class="reset-a">
+                                <p>Quản lý địa chỉ</p>
+                            </a>
                         </div>
                         <div class="sub-usr">
                             <span class="ti-settings"></span>
-                            <a href="<?php echo $app->geturl("user-info") ?>" class="reset-a"><p>Cài đặt và hồ sơ cá nhân</p></a>
+                            <a href="<?php echo $app->geturl("user-info") ?>" class="reset-a">
+                                <p>Cài đặt và hồ sơ cá nhân</p>
+                            </a>
                         </div>
                         <div class="sub-usr">
                             <span class="ti-help"></span>
@@ -108,11 +130,13 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <div class="sub-usr">
                             <span class="ti-shift-left"></span>
-                            <a href="<?php echo $app->geturl("auth/logout.php") ?>" class="reset-a"><p>Đăng xuất</p></a>
+                            <a href="<?php echo $app->geturl("auth/logout.php") ?>" class="reset-a">
+                                <p>Đăng xuất</p>
+                            </a>
                         </div>
                     </div>
                     <?php else : ?>
-                        <a class="btn-login" href="<?php echo $app->geturl("auth/login.php")?>">LOGIN</a>
+                    <a class="btn-login" href="<?php echo $app->geturl("auth/login.php")?>">LOGIN</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -123,4 +147,33 @@ if (isset($_SESSION['user'])) {
 <script>
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+
+<?php if ($auth && $countSeen > 0) : ?>
+const notiEl = $(".noti");
+var flagNoti = true;
+
+notiEl.addEventListener("click", function(e) {
+    if (flagNoti) {
+        flagNoti = false;
+        const data = {
+            idKH: <?php echo $idkh;?>,
+        };
+
+        fetch('<?php echo API_URL ?>/notifications.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success: ', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+});
+<?php endif;?>
 </script>

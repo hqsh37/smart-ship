@@ -75,6 +75,9 @@ if (isset($_POST['btnLogin'])) {
                     <div class="form-group cus-form">
                         <button type="submit" name="btnLogin" class="btn btn-outline-dark btn-cus">Login</button>
                     </div>
+                    <div class="">
+                    <a href="forgot-password.php">forgot passord?</a>
+                    </div>
                     <br />
                     <div class="">
                         <p class="">Don't have an account? <a href="signup.php">Create account</a></p>

@@ -16,7 +16,6 @@ button.btn-lg {
     padding: 10px 18px;
     border-radius: 8px;
     color: #034460;
-    background: #FEC201;
 }
 
 button.btn-lg:hover {
@@ -497,6 +496,17 @@ span.usr-fullname {
     font-weight: 500;
 }
 
+/* pay-order.php */
+.cus-subpay {
+    display: flex;
+    align-items: center;
+
+    input {
+        width: 30%;
+        margin-right: 8px;
+    }
+}
+
 /* footer.php */
 .footer {
     border-top: 1px solid rgba(0, 0, 0, .1);
@@ -548,5 +558,6 @@ a.link-footer:hover {
 /* Pages no user */
 .no-user {
     margin-top: 16px;
+    width: 100%;
     text-align: center;
 }

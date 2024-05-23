@@ -1,21 +1,29 @@
 <?php
-// hinhthucPay: transfer
-// codPay: cod-all
-// cod-cash: 0
-// sumCash: 0
-// idDH: 49
-// tongTien: 8610
-// btnPayOrder: 
+if (!isset($_POST['btncomplete']) && !isset($_POST['btnPayOrder'])) {
+    echo '<script>
+    window.location.href = "'.$this->geturl("create-order").'";
+    </script>';
+    die();
+}
+
 if (isset($_POST['btncomplete'])) {
     echo '
     <script>
         alert("Đon hàng đã xong! \nCảm ơn bạn đã sử dụng dịch vụ SmartShip!");
         window.location.href = "<?php echo $this->geturl("orders-delivery"); ?>";
     </script>';
-
 }
 
-if (isset($_POST['btnPayOrder'])) {
+$hinhthucPay = "";
+$codPay = "";
+
+if (isset($_POST['btnPayOrder']) && isset($_SESSION['func']) && $_SESSION['func']['order'] === 'payOrder') {
+    $user = $_SESSION['user'];
+    $idkh = $user->idKH;
+    // clear handle create order
+    unset($_SESSION['func']);
+    unset($_SESSION['product']);
+
     $hinhthucPay = $_POST['hinhthucPay'];
     $codPay = $_POST['codPay'];
     $codCash = $_POST['cod-cash'];
@@ -66,12 +74,19 @@ if (isset($_POST['btnPayOrder'])) {
             "tienCod" => $sumCash,
         ]);
 
+        // create notification
+        Notification::create([
+            "idKH" => $idkh,
+            "trangThai" => "not-seen",
+            "noiDung" => "Đơn hàng <strong>{$resultDH->maDonHang}</strong> đã tạo thành công.",
+            "ngay" => date('Y-m-d H:i:s'),
+        ]);
+
     } else {
         $error = "Có lỗi xảy ra!";
     }
 
-}
-// 
+} 
 ?>
 
 <div class="container main">

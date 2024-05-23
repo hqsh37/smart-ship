@@ -22,15 +22,18 @@ if (isset($_SESSION['user'])) {
             <h4 class="text-center">Thông tin người nhận</h4>
             <div class="form-group">
                 <label for="txt-name">Tên người nhận</label>
-                <input type="text" class="form-control" id="txt-name" name="receiverName" placeholder="Nhập tên người nhận" required>
+                <input type="text" class="form-control" id="txt-name" name="receiverName"
+                    placeholder="Nhập tên người nhận" required>
             </div>
             <div class="form-group">
                 <label for="txt-sdt">Số điện thoại</label>
-                <input type="text" class="form-control" id="txt-sdt" name="receiverPhone" placeholder="Nhập số điện thoại" required>
+                <input type="text" class="form-control" id="txt-sdt" name="receiverPhone"
+                    placeholder="Nhập số điện thoại" required>
             </div>
             <div class="form-group">
                 <label for="txt-address">Địa chỉ chi tiết</label>
-                <input type="text" class="form-control" id="txt-address" name="receiverPlace" placeholder="Nhập địa chỉ tiết" required>
+                <input type="text" class="form-control" id="txt-address" name="receiverPlace"
+                    placeholder="Nhập địa chỉ tiết" required>
             </div>
             <div class="form-group">
                 <div class="row">
@@ -73,7 +76,7 @@ if (isset($_SESSION['user'])) {
             </div>
             <br />
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="layhang" id="lh-buucuc" value="buucuc" disabled >
+                <input class="form-check-input" type="radio" name="layhang" id="lh-buucuc" value="buucuc" disabled>
                 <label class="form-check-label" for="lh-buucuc">
                     Gửi hàng bưu cục
                 </label>
@@ -84,6 +87,9 @@ if (isset($_SESSION['user'])) {
 
         <div>
             <h4 class="text-center">Thông tin đơn hàng</h4>
+            <div style="display: none">
+                <input name="createOrder" value="1">
+            </div>
             <div class="form-group">
                 <label for="txt-name-product">Tên sản phẩm</label>
                 <input type="text" class="form-control" id="txt-name-product" name="productName"
@@ -92,16 +98,19 @@ if (isset($_SESSION['user'])) {
             <div class="row">
                 <div class="col">
                     <label for="txt-kl">Khối lượng(g)</label>
-                    <input type="number" class="form-control" id="txt-kl" name="khoiluong" placeholder="Nhập khối lượng" required>
+                    <input type="number" class="form-control" id="txt-kl" name="khoiluong" placeholder="Nhập khối lượng"
+                        required>
                 </div>
                 <div class="col">
                     <label for="txt-sl">Số lượng</label>
-                    <input type="number" class="form-control" id="txt-sl" name="soluong" placeholder="Nhập số lượng" value="1" required>
+                    <input type="number" class="form-control" id="txt-sl" name="soluong" placeholder="Nhập số lượng"
+                        value="1" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="txt-address">Tổng khối lượng</label>
-                <input type="text" class="form-control" id="txt-tongkl" name="tongKl" value="Vui lòng khối lượng!" readonly>
+                <input type="text" class="form-control" id="txt-tongkl" name="tongKl" value="Vui lòng nhập khối lượng!"
+                    readonly>
             </div>
             <div class="row">
                 <label for="city">Kích thước(mm)</label>
@@ -138,7 +147,8 @@ if (isset($_SESSION['user'])) {
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="gia-tri-cao" id="gia-tri-cao">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="gia-tri-cao"
+                        id="gia-tri-cao">
                     <label class="form-check-label" for="gia-tri-cao">
                         Hàng giá trị cao
                     </label>
@@ -174,7 +184,8 @@ if (isset($_SESSION['user'])) {
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="nguyen-hop" id="nguyen-hop">
+                    <input class="form-check-input" type="checkbox" name="dichvuGT[]" value="nguyen-hop"
+                        id="nguyen-hop">
                     <label class="form-check-label" for="nguyen-hop">
                         Hàng nguyên hộp
                     </label>
@@ -183,7 +194,7 @@ if (isset($_SESSION['user'])) {
             <br />
             <br />
             <div class="d-flex justify-content-center align-items-center">
-                <button class="btn-lg" name="btnCreateOrder">Tạo đơn hàng</button>
+                <button class="btn-lg">Tạo đơn hàng</button>
             </div>
         </div>
     </form>
@@ -332,3 +343,7 @@ if (isset($_SESSION['user'])) {
 
     <?php endif; ?>
 </div>
+
+<?php
+$_SESSION['func']['order'] = 'createOrder';
+?>

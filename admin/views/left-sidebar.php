@@ -36,7 +36,7 @@ $position = $_SESSION['admin']->position;
             </a>
             <ul class="treeview-menu">
                 <li><a href="<?php echo $app->geturl("postoffice"); ?>"><i class="fa fa-circle-o"></i> Quản lý bưu cục</a></li>
-                <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Quản lý mã khuyến mãi</a></li>
+                <li><a href="<?php echo $app->geturl("promotion"); ?>"><i class="fa fa-circle-o"></i> Quản lý mã khuyến mãi</a></li>
                 <li><a href="<?php echo $app->geturl("transport-fee"); ?>"><i class="fa fa-home"></i> <span>Quản lý phí vận chuyển</span></a></li>
             </ul>
         </li>

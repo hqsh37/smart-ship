@@ -3,6 +3,8 @@ $urlpath = $this->geturl("handle-pay");
 
 if (isset($_POST['btnApprove'])) {
     $idGiaoDich = $_POST['idGiaoDich'];
+    $orderId = $_POST['orderId'];
+    $userId = $_POST['userId'];
 
     $upTransaction = Transaction::update([
         "idGiaoDich" => $idGiaoDich,
@@ -12,6 +14,13 @@ if (isset($_POST['btnApprove'])) {
     ]);
 
     if ($upTransaction) {
+        // create notification
+        Notification::create([
+            "idKH" => $userId,
+            "trangThai" => "not-seen",
+            "noiDung" => "Đơn hàng <strong>{$orderId}</strong> thanh toán thành công.",
+            "ngay" => date('Y-m-d H:i:s'),
+        ]);
         echo '<script>
             alert("Duyệt thành công!");
             window.location.href = "'.$urlpath.'";
@@ -26,6 +35,8 @@ if (isset($_POST['btnApprove'])) {
 
 if (isset($_POST['btnRefuse'])) {
     $idGiaoDich = $_POST['idGiaoDich'];
+    $orderId = $_POST['orderId'];
+    $userId = $_POST['userId'];
 
     $upTransaction = Transaction::update([
         "idGiaoDich" => $idGiaoDich,
@@ -35,6 +46,13 @@ if (isset($_POST['btnRefuse'])) {
     ]);
 
     if ($upTransaction) {
+        // create notification
+        Notification::create([
+            "idKH" => $userId,
+            "trangThai" => "not-seen",
+            "noiDung" => "Đơn hàng <strong>{$orderId}</strong> bị huỷ do quá hạn thanh toán.",
+            "ngay" => date('Y-m-d H:i:s'),
+        ]);
         echo '<script>
             alert("Từ chối thành công!");
             window.location.href = "'.$urlpath.'";
@@ -107,8 +125,9 @@ $tt = 1;
                                         </div>
                                         <div class="modal-body">
                                             <div style="display: none">
-                                                <input type="text" name="idGiaoDich"
-                                                    value="<?php echo $item->idGiaoDich ?>">
+                                                <input type="text" name="idGiaoDich" value="<?php echo $item->idGiaoDich ?>">
+                                                <input name="orderId" value="<?php echo $order->maDonHang; ?>">
+                                                <input name="userId" value="<?php echo $order->idKH; ?>">
                                             </div>
                                             <p>Bạn có chắc duyệt đơn hàng này!</p>
                                         </div>
@@ -134,8 +153,9 @@ $tt = 1;
                                         </div>
                                         <div class="modal-body">
                                             <div style="display: none">
-                                                <input type="text" name="idGiaoDich"
-                                                    value="<?php echo $item->idGiaoDich ?>">
+                                                <input type="text" name="idGiaoDich" value="<?php echo $item->idGiaoDich ?>">
+                                                <input name="orderId" value="<?php echo $order->maDonHang; ?>">
+                                                <input name="userId" value="<?php echo $order->idKH; ?>">
                                             </div>
                                             <p>Bạn có chắc từ chối đơn hàng này!</p>
                                         </div>

@@ -6,15 +6,11 @@ session_start();
 define('HOST', '127.0.0.1');
 define('USER', 'root');
 define('PASSWORD', '');
+define('USER_NAME', 'smart ship');
+define('MAIL_NAME', 'nikfbhana01@gmail.com');
+define('MAIL_PASSWORD', 'pfij rieh sngr cfio');
 define('DB', 'db_smartShip');
 define('PROJECT_NAME', '/smart-ship');
-
-// checking session
-// if(isset($_SESSION['auth'])) {
-//     echo '<script>
-//     window.location.href = "'.PROJECT_NAME.'/auth/login.php";
-//     </script>';
-// } 
 
 // Lấy thời gian Việt Nam
 date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -26,6 +22,9 @@ $http_api = $http_host.PROJECT_NAME.'/api/';
 
 define('APP_PATH', $app_folder);
 define('API_URL', $http_api);
+
+// sử dụng composer
+include APP_PATH.'/vendor/autoload.php';
 
 spl_autoload_register(function($className) {
     $class_path = APP_PATH."/librs/".$className.".php";

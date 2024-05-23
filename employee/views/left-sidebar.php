@@ -73,7 +73,7 @@ $position = $_SESSION['employee']->chucVu;
                 <li><a href="<?php echo $app->geturl("management-area"); ?>"><i class="fa fa-circle-o"></i>Quản lý khu vực</a></li>
                 <li><a href="<?php echo $app->geturl("create-user"); ?>"><i class="fa fa-circle-o"></i>Cấp tài khoản</a></li>
                 <?php endif;?>
-                <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Quản lý khuyến mãi</a></li>
+                <li><a href="<?php echo $app->geturl("promotion"); ?>"><i class="fa fa-circle-o"></i> Quản lý khuyến mãi</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Danh sách hàng hoá</a></li>
             </ul>
         </li>   

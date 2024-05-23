@@ -402,15 +402,15 @@ if (isset($_POST["type"]) && $_POST["type"] === "del-address") {
 
 
     // Sử dụng hàm UpdateSelect
-    UpdateSelect("province", "<?php echo API_URL ?>/district.php?provinceId=", "district");
-    UpdateSelect("district", "<?php echo API_URL ?>/ward.php?districtId=", "wards");
-    UpdateSelectProvice("<?php echo API_URL ?>/province.php", "province", 1);
+    UpdateSelect("province", "<?php echo API_URL ?>district.php?provinceId=", "district");
+    UpdateSelect("district", "<?php echo API_URL ?>ward.php?districtId=", "wards");
+    UpdateSelectProvice("<?php echo API_URL ?>province.php", "province", 1);
     <?php foreach($address as $item) : ?>
-    UpdateSelect("province-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>/district.php?provinceId=",
+    UpdateSelect("province-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>district.php?provinceId=",
         "district-<?php echo $item->idDiaChiKH; ?>");
-    UpdateSelect("district-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>/ward.php?districtId=",
+    UpdateSelect("district-<?php echo $item->idDiaChiKH; ?>", "<?php echo API_URL ?>ward.php?districtId=",
         "wards-<?php echo $item->idDiaChiKH; ?>");
-    UpdateSelectProvice("<?php echo API_URL ?>/province.php", "province-<?php echo $item->idDiaChiKH; ?>", 0);
+    UpdateSelectProvice("<?php echo API_URL ?>province.php", "province-<?php echo $item->idDiaChiKH; ?>", 0);
     <?php endforeach; ?>
     </script>
 
