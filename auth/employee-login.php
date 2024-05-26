@@ -35,8 +35,8 @@ if (isset($_POST['btnLogin'])) {
                 "maNhanVien" => $employeeId,
             ], " `idNhanVien`, `idBuuCuc`, `maNhanVien`, `chucVu`, `tenNhanVien`, `email`");
         }
-    } elseif ($checkEmployeeId && $checkEmployeeId->chucVu === "delivery") {
-        $pass_hash = $checkEmployeeId->password;
+    } elseif ($checkEmployeeId && $checkEmployeeId->chucVu === "shipper") {
+        $pass_hash = $checkEmployeeId->matKhau;
         if(!password_verify($password, $pass_hash)) {
             $error = "Tài khoản mật khẩu không chính xác";
         } else {

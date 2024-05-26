@@ -39,17 +39,6 @@ if (isset($_SESSION['user'])) {
                 <li><a href="<?php echo $app->geturl("orders-delivery") ?>">Quản lý đơn hàng</a></li>
                 <li><a href="<?php echo $app->geturl("revenue") ?>">Quản lý doanh thu</a></li>
                 <li><a href="<?php echo $app->geturl("tracking") ?>">Tiến trình ĐH</a></li>
-                <li>
-                    <a href="#">
-                        Khác
-                        <i class="icon-down ti-angle-down"></i>
-                    </a>
-                    <ul class="subnav">
-                        <li><a href="#">doanh thu</a></li>
-                        <li><a href="#">Extras</a></li>
-                        <li><a href="#">Media</a></li>
-                    </ul>
-                </li>
             </ul>
             <div class="header-right">
                 <div class="create-product">

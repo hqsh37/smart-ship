@@ -58,7 +58,7 @@ if (isset($_POST['btnCreate'])) {
     if ($error === "") {
         echo '<script>
             alert("Tạo tài khoản thành công!");
-            window.location.href = "'.$this->geturl("employeer").'";
+            window.location.href = "'.$this->geturl("employee").'";
             </script>';
     } else {
         echo '<script>alert("'. $error. '");
@@ -90,12 +90,6 @@ if (isset($_POST['btnCreate'])) {
                     <option value="employee">Nhân viên bưu cục</option>
                     <option value="shipper">Nhân viên giao hàng</option>
                 </select>
-            </div>
-            <div class="col-md-6 mt-8">
-                <label for="postofficeId"><b>Mã bưu cục:</b></label>
-                <input type="text" id="postofficeId" class="form-control" placeholder="Nhập mã bưu cục" pattern=".{6}"
-                    maxlength="6" name="postofficeId" required>
-                <small>Mã bưu cục gồm 6 ký tự</small>
             </div>
             <div class="col-md-6 mt-8">
                 <label for="phone"><b>Số điện thoại:</b></label>

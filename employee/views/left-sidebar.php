@@ -40,7 +40,8 @@ $position = $_SESSION['employee']->chucVu;
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Quản lý vận đơn</a></li>
+                <li><a href="<?php echo $app->geturl("order-list"); ?>"><i class="fa fa-circle-o"></i> Quản lý đơn hàng</a></li>
+                <li><a href="<?php echo $app->geturl("order-divide"); ?>"><i class="fa fa-circle-o"></i> Quản lý vận đơn</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Thống kê tiền hàng</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Thống kê doanh thu</a></li>
                 <li><a href="<?php echo $app->geturl("create-order"); ?>"><i class="fa fa-circle-o"></i> Đơn hàng cần xử lý</a></li>
